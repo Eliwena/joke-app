@@ -37,7 +37,7 @@ workflows:
           requires:
             - "node/run"
             - "node/test"
-          images: eliwena/joke-app:latest
+          image: eliwena/joke-app:latest
           docker-username: eliwena
           filters:
             branches:
