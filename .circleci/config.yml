@@ -21,7 +21,7 @@ workflows:
             branches:
               only:
                 - circleci
-                
+
       - heroku/deploy-via-git:
           requires:
             - "node/run"
