@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.2
+  heroku: circleci/heroku@1.2.6
 
 workflows:
   build-test:
@@ -16,6 +17,16 @@ workflows:
       - node/test:
           requires:
             - "node/run"
+          filters:
+            branches:
+              only:
+                - circleci
+                
+      - heroku/deploy-via-git:
+          requires:
+            - "node/run"
+            - "node/test"
+          app-name: "heroku-circle-ci-5iw4"
           filters:
             branches:
               only:
