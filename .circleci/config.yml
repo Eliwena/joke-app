@@ -34,11 +34,7 @@ workflows:
                 - circleci
 
       - docker/publish:
-          requires:
-            - "node/run"
-            - "node/test"
           image: eliwena/joke-app:latest
-          docker-username: eliwena
           filters:
             branches:
               only:
