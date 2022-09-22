@@ -33,7 +33,7 @@ workflows:
               only:
                 - circleci
 
-      - docker-image:
+      - docker/publish:
           requires:
             - "node/run"
             - "node/test"
