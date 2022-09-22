@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
   heroku: circleci/heroku@1.2.6
+  docker: circleci/docker@2.1.3
 
 workflows:
   build-test:
@@ -31,3 +32,15 @@ workflows:
             branches:
               only:
                 - circleci
+
+      - docker-image:
+          requires:
+            - "node/run"
+            - "node/test"
+          images: eliwena/joke-app:latest
+          docker-username: eliwena
+          filters:
+            branches:
+              only:
+                - circleci
+          
