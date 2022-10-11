@@ -23,7 +23,7 @@ pipeline {
             script {
                 VERSION = bat([script: "node -e \"console.log(require(\'./package.json\').version)\"", returnStdout: true]).trim()
                 docker.withRegistry('https://registry.heroku.com', 'herokuId') {
-                bat "docker buildx build --platform linux/amd64 -t ${registry}:$VERSION ."
+                bat "docker build  -t ${registry}:$VERSION ."
                 bat "docker push ${registry}:$VERSION"
                 }
             }
