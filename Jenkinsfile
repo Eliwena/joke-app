@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "latest"
         registry = "registry.heroku.com/joke-jenkins-eli/web"
     }
 
@@ -21,10 +20,9 @@ pipeline {
     stage('deploy') {
         steps {
             script {
-                VERSION = bat([script: "node -e \"console.log(require(\'./package.json\').version)\"", returnStdout: true]).trim()
                 docker.withRegistry('https://registry.heroku.com', 'herokuId') {
-                bat "docker buildx build --platform linux/amd64 -t ${registry}:$VERSION ."
-                bat "docker push ${registry}:$VERSION"
+                bat "docker buildx build --platform linux/amd64 -t ${registry}:latest ."
+                bat "docker push ${registry}:latest"
                 }
             }
 
