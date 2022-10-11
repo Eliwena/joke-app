@@ -20,16 +20,16 @@ pipeline {
     stage('deploy') {
         steps {
             script {
-                VERSION = sh([script: "node -e \"console.log(require(\'./package.json\').version)\"", returnStdout: true]).trim()
+                VERSION = bat([script: "node -e \"console.log(require(\'./package.json\').version)\"", returnStdout: true]).trim()
                 docker.withRegistry('https://registry.heroku.com', 'herokuId') {
-                sh "docker buildx build --platform linux/amd64 -t ${registry}:$VERSION ."
-                sh "docker push ${registry}:$VERSION"
+                bat "docker buildx build --platform linux/amd64 -t ${registry}:$VERSION ."
+                bat "docker push ${registry}:$VERSION"
                 }
             }
 
             withCredentials([usernamePassword(credentialsId: 'herokuId', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 // sh "echo ${USERNAME}  echo ${PASSWORD} | heroku login"
-                sh "HEROKU_API_KEY=${PASSWORD} npx heroku container:release web --app=joke-jenkins"
+                bat "HEROKU_API_KEY=${PASSWORD} npx heroku container:release web --app=joke-jenkins"
             }
         }
     }
