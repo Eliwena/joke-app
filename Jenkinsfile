@@ -30,7 +30,7 @@ pipeline {
 
             withCredentials([usernamePassword(credentialsId: 'herokuId', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 // sh "echo ${USERNAME}  echo ${PASSWORD} | heroku login"
-                bat "HEROKU_API_KEY=${PASSWORD} npx heroku container:release web --app=joke-jenkins"
+                bat "HEROKU_API_KEY=${PASSWORD} npx heroku container:release web --app=joke-jenkins-eli"
             }
         }
     }
