@@ -10,9 +10,9 @@ pipeline {
         stage('build-test') {
             steps {
                 script{
-                    sh "npm install"
-                    sh "npm build"
-                    sh "npm test"
+                    bat "npm install"
+                    bat "npm build"
+                    bat "npm test"
                 }
             }
         }
